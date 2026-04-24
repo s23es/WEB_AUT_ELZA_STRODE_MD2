@@ -19,4 +19,21 @@ export class AppointmentPage extends BasePage {
         return cy.get('#radio_program_medicaid');
     }
     //---------------------------------------------------------
+    static get dateField(){
+        return cy.get('#txt_visit_date');
+    }
+
+    static dateDay(day){
+        //not(.old):not(.new) avoids other month dates
+        return cy.get('.datepicker-days td.day:not(.old):not(.new)').contains(String(day));
+    }
+    //---------------------------------------------------------
+    static get commentField(){
+        return cy.get('#txt_comment');
+    }
+
+    static get bookButton(){
+        return cy.get('#btn-book-appointment');
+    }
+    //---------------------------------------------------------
 }

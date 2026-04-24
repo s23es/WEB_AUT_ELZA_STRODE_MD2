@@ -2,6 +2,7 @@ import { BasePage } from "../pageObjects/basePage";
 import { HomePage } from "../pageObjects/homePage";
 import { LoginPage } from "../pageObjects/loginPage";
 import { AppointmentPage } from "../pageObjects/appointmentPage";
+import { SummaryPage } from "../pageObjects/summaryPage";
 
 describe('CURA Healthcare', () => {
   context('With demo login', () => {
@@ -18,6 +19,19 @@ describe('CURA Healthcare', () => {
       AppointmentPage.selectFacility('Seoul CURA Healthcare Center'); //Set facility
       AppointmentPage.checkReadmission.click();                       //Check readmission
       AppointmentPage.radioMedicaid.click();                          //Check medicaid
+
+      AppointmentPage.dateField.click();                              //Select date - 30
+      AppointmentPage.dateDay('30').click();
+
+      AppointmentPage.commentField.type('CURA Healthcare Service');   //Set comment
+      AppointmentPage.bookButton.click();                             //Click book appointment
+
+      //Validate
+      SummaryPage.facility.should('contain.text', 'Seoul CURA Healthcare Center');
+      SummaryPage.hospitalReadmission.should('contain.text', 'Yes');
+      SummaryPage.program.should('contain.text', 'Medicaid');
+      SummaryPage.visitDate.should('contain.text', '30/04/2026');
+      SummaryPage.comment.should('contain.text', 'CURA Healthcare Service');
     });
     //----------------------------------------------------------------------------------------
   });

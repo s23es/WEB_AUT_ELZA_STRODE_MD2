@@ -36,4 +36,20 @@ export class AppointmentPage extends BasePage {
         return cy.get('#btn-book-appointment');
     }
     //---------------------------------------------------------
+    static get stackIcon(){
+        return cy.get('#menu-toggle');
+    }
+
+    static get sidebar(){
+        return cy.get('#sidebar-wrapper');
+    }
+
+    static clickHistory(){
+        cy.get('#sidebar-wrapper').find('a').contains('History').click();
+    }
+
+    static get history(){
+        return cy.get('#history');
+    }
+    //---------------------------------------------------------
 }
